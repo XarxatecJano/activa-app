@@ -1,8 +1,8 @@
 import express from 'express';
-import { contactFormProcessUtilities } from '../handlers/contacFormProcessUtilities.js';
+import {insertStudent} from "../handlers/student/insertStudent.js";
 
 const router = express.Router();
 
-router.post("/procesa-formulario",contactFormProcessUtilities.sendResponseToBrowserAfterSubmit);
+router.post("/student",insertStudent);
 
 export {router};

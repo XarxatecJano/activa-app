@@ -9,22 +9,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.contactFormProcessUtilities = void 0;
-const env_js_1 = require("../env.js");
-class contactFormProcessUtilities {
-    static sendResponseToBrowserAfterSubmit(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            yield env_js_1.connection.connect();
-            let data = 0;
-            yield env_js_1.connection.query('SELECT 1 + 1 AS solution', (err, rows, fields) => {
-                if (err)
-                    throw err;
-                data = rows[0].solution;
-                console.log(data);
-            });
-            yield env_js_1.connection.end();
-            res.send(`<p>${data}</p>`);
+exports.insertStudent = void 0;
+const studentServices_js_1 = require("../../model/services/studentServices.js");
+function insertStudent(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const newStudent = req.body;
+        (0, studentServices_js_1.createStudent)(newStudent, (err, studentId) => {
+            if (err) {
+                return res.status(500).json({ "message": err.message });
+            }
+            res.status(200).json({ "orderId": studentId });
         });
-    }
+    });
 }
-exports.contactFormProcessUtilities = contactFormProcessUtilities;
+exports.insertStudent = insertStudent;
+;
