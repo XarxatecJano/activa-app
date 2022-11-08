@@ -1,8 +1,8 @@
-import express, {Request, Response} from "express";
+import express from "express";
 import {createStudent} from "../../model/services/studentServices.js";
 import {Student} from "../../model/types/student.js";
 
-export async function insertStudent(req: Request, res: Response){
+async function insertStudent(req: express.Request, res: express.Response){
     const newStudent: Student = req.body;
     createStudent(newStudent, (err: Error, studentId: number) => {
       if (err) {
@@ -12,3 +12,5 @@ export async function insertStudent(req: Request, res: Response){
       res.status(200).json({"orderId": studentId});
     });
 };
+
+export {insertStudent};
