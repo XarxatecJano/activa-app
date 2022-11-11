@@ -18,7 +18,7 @@ function createStudent(student: Student, callback: Function){
   };
 
 function findAllStudents(callback:Function){
-  const queryString = "SELECT name, first_surname, second_surname, email_personal, email_activa, phone_number, zip_code FROM student";
+  const queryString = "SELECT id, name, first_surname, second_surname, email_personal, email_activa, phone_number, zip_code FROM student";
   db.query(queryString, (err, result)=>{
     if(err) callback(err, null);
 
@@ -39,4 +39,15 @@ function findOneStudent(id: string, callback: Function){
   })
 }
 
-export {createStudent, findAllStudents, findOneStudent};
+function deleteOneStudent(id: string, callback: Function){
+  const queryString = "DELETE FROM student WHERE id = ?";
+  db.query(queryString, [id], (err, result)=>{
+    if(err){ callback(err, null)};
+    
+    const studentDeleted:String = "deleted succesfull";
+   
+    callback(null, studentDeleted);
+  })
+}
+
+export {createStudent, findAllStudents, findOneStudent, deleteOneStudent};
