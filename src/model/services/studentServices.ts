@@ -39,6 +39,8 @@ function findOneStudent(id: string, callback: Function){
   })
 }
 
+
+
 function deleteOneStudent(id: string, callback: Function){
   const queryString = "DELETE FROM student WHERE id = ?";
   db.query(queryString, [id], (err, result)=>{

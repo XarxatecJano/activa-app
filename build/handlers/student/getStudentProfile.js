@@ -17,9 +17,8 @@ const axios_1 = __importDefault(require("axios"));
 function getStudentProfile(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const targetStudentId = 3;
-        //const targetStudent = await fetch(`http://localhost:3000/students/${targetStudentId}`);
         const targetStudent = yield (0, axios_1.default)(`http://localhost:3000/students/${targetStudentId}`);
-        //const targetStudent: Student = axiosResponse.data;
+        //TODO const targetStudent: Student = axiosResponse.data;
         console.log(targetStudent);
         res.render("pages/studentProfileUpdater", {
             student: targetStudent.data
