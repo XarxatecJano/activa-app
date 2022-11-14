@@ -6,6 +6,7 @@ const methodOverride = require('method-override');
 
 const app = express();
 
+app.set("view engine", "ejs");
 
 const path_static_files = path.join(__dirname, "..", "public");
 app.use(express.static(path_static_files));
@@ -16,7 +17,7 @@ app.use(methodOverride((req: express.Request, res: express.Response)=>{
         delete req.body._method;
         return method;
     }
-}))
+}));
 
 app.use("/", router);
 

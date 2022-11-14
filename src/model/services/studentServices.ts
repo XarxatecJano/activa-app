@@ -29,7 +29,7 @@ function findAllStudents(callback:Function){
 
 function findOneStudent(id: string, callback: Function){
  
-  const queryString = "SELECT name, first_surname, second_surname, email_personal, email_activa, phone_number, zip_code FROM student WHERE id = ?";
+  const queryString = "SELECT id, name, first_surname, second_surname, email_personal, email_activa, phone_number, zip_code FROM student WHERE id = ?";
   db.query(queryString, [id], (err, result)=>{
     if(err){ callback(err, null)};
     
@@ -50,4 +50,17 @@ function deleteOneStudent(id: string, callback: Function){
   })
 }
 
-export {createStudent, findAllStudents, findOneStudent, deleteOneStudent};
+function putOneStudent(id: string, student: Student, callback: Function){
+
+    const queryString = "UPDATE student SET name=?, first_surname=?, second_surname=?, email_personal=?, email_activa=?, phone_number=?, zip_code=? WHERE id=?";
+    db.query(queryString, [student.name, student.firstSurname, student.secondSurname, student.personalEmailAddress, student.activaEmailAddress, student.phoneNumber, student.zipCode, id],
+      (err, result)=>{
+        if(err){ callback(err, null)};
+        
+        const studentUpdated:String = "update succesfull";
+       
+        callback(null, studentUpdated);
+      })
+  }
+
+export {createStudent, findAllStudents, findOneStudent, deleteOneStudent, putOneStudent};

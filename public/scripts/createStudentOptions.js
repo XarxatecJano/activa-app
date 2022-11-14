@@ -1,7 +1,6 @@
 async function createOptionsForSelectStudent(){
-    const students =await fetch("http://localhost:3000/students");
+    const students =await fetch("http://localhost:3000/students", {method: 'GET', headers: {'Content-Type': 'application/json'}});
     const studentsJSON = await students.json();
-    console.log(studentsJSON);
     let optionsString='';
     let option='';
     for (let student of studentsJSON){
