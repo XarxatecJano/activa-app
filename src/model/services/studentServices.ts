@@ -1,6 +1,8 @@
-import {Student} from "../types/student.js";
+import {Student} from '../types/Student.js';
 import {db} from "../../config.js";
 import {OkPacket, RowDataPacket} from "mysql2";
+import {LooseObject} from '../types/LooseObject.js';
+import {buildPatchQuery} from '../../utils/buildPatchQuery.js';
 
 function createStudent(student: Student, callback: Function){
     const queryString = "INSERT INTO student (name, first_surname, second_surname, email_personal, email_activa, phone_number, zip_code) VALUES (?, ?, ?, ?, ?, ?, ?)"
@@ -25,7 +27,7 @@ function findAllStudents(callback:Function){
     const students = result;
     callback(null, students);
   } )
-}
+};
 
 function findOneStudent(id: string, callback: Function){
  
@@ -37,9 +39,7 @@ function findOneStudent(id: string, callback: Function){
    
     callback(null, studentFound);
   })
-}
-
-
+};
 
 function deleteOneStudent(id: string, callback: Function){
   const queryString = "DELETE FROM student WHERE id = ?";
@@ -50,7 +50,7 @@ function deleteOneStudent(id: string, callback: Function){
    
     callback(null, studentDeleted);
   })
-}
+};
 
 function putOneStudent(id: string, student: Student, callback: Function){
 
@@ -63,6 +63,22 @@ function putOneStudent(id: string, student: Student, callback: Function){
        
         callback(null, studentUpdated);
       })
-  }
+  };
 
-export {createStudent, findAllStudents, findOneStudent, deleteOneStudent, putOneStudent};
+function patchStudent(id: string, updatedData: LooseObject, callback:Function){
+      const queryString = buildPatchQuery("student", id, updatedData);
+      if (queryString){
+        db.query(queryString, 
+          (err, result)=>{
+            if(err){ callback(err, null)};
+            
+            const studentUpdated:String = "update succesfull";
+           
+            callback(null, studentUpdated);
+          })
+      }
+     
+};
+
+
+export {createStudent, findAllStudents, findOneStudent, deleteOneStudent, putOneStudent, patchStudent};

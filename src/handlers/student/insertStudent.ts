@@ -1,6 +1,6 @@
 import express from "express";
 import {createStudent} from "../../model/services/studentServices.js";
-import {Student} from "../../model/types/student.js";
+import {Student} from "../../model/types/Student.js";
 
 async function insertStudent(req: express.Request, res: express.Response){
     

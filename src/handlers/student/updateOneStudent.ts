@@ -1,6 +1,6 @@
 import express from 'express';
 import { putOneStudent } from '../../model/services/studentServices';
-import {Student} from '../../model/types/student.js';
+import {Student} from '../../model/types/Student.js';
 
 function updateOneStudent(req: express.Request, res: express.Response){
     const targetStudentId = req.params.id_student;

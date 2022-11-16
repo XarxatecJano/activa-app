@@ -1,5 +1,5 @@
 import express from 'express';
-import { Student } from '../../model/types/student.js';
+import { Student } from '../../model/types/Student.js';
 import {findOneStudent} from '../../model/services/studentServices.js';
 
 async function getOneStudent(req: express.Request, res: express.Response){

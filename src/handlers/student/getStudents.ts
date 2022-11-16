@@ -1,4 +1,4 @@
-import { Student } from "../../model/types/student.js";
+import { Student } from "../../model/types/Student.js";
 import {findAllStudents} from "../../model/services/studentServices.js";
 import express from 'express';
 
