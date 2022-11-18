@@ -1,8 +1,9 @@
 import {Student} from '../types/Student.js';
-import {db} from "../../config.js";
+import {db, connectionData} from "../../config.js";
 import {OkPacket, RowDataPacket} from "mysql2";
 import {LooseObject} from '../types/LooseObject.js';
 import {buildPatchQuery} from '../../utils/buildPatchQuery.js';
+import mysqlPromise from "mysql2/promise";
 
 function createStudent(student: Student, callback: Function){
     const queryString = "INSERT INTO student (name, first_surname, second_surname, email_personal, email_activa, phone_number, zip_code) VALUES (?, ?, ?, ?, ?, ?, ?)"
@@ -40,6 +41,14 @@ function findOneStudent(id: string, callback: Function){
     callback(null, studentFound);
   })
 };
+
+async function findOneStudentForPatch (id: string){
+  
+  const queryString = "SELECT id, name, first_surname, second_surname, email_personal, email_activa, phone_number, zip_code FROM student WHERE id = ?";
+  const connection = await mysqlPromise.createConnection(connectionData);
+  const result = await connection.execute(queryString, [id]);
+  return result;
+}
 
 function deleteOneStudent(id: string, callback: Function){
   const queryString = "DELETE FROM student WHERE id = ?";
@@ -81,4 +90,4 @@ function patchStudent(id: string, updatedData: LooseObject, callback:Function){
 };
 
 
-export {createStudent, findAllStudents, findOneStudent, deleteOneStudent, putOneStudent, patchStudent};
+export {createStudent, findAllStudents, findOneStudent, deleteOneStudent, putOneStudent, patchStudent, findOneStudentForPatch};

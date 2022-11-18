@@ -10,7 +10,6 @@ function buildPatchQuery(table, id, data) {
             return `${key}=${valueToSet}`;
         }).join(",");
         result += ` WHERE id=${id}`;
-        console.log(result);
     }
     return result;
 }

@@ -9,7 +9,6 @@ function buildPatchQuery(table:string, id:string, data: LooseObject):string|null
             return `${key}=${valueToSet}`;
         }).join(",");
         result+= ` WHERE id=${id}`;
-        console.log(result);
     }
     return result;
 }
