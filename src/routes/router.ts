@@ -17,7 +17,9 @@ router.get("/students", getStudents);
 
 router.get("/students/:id_student", getOneStudent);
 
-router.delete("/students", deleteStudent);
+//router.delete("/students", deleteStudent);
+
+router.delete("/students/:id_student", deleteStudent);
 
 router.put("/students/:id_student", updateOneStudent);
 

@@ -14,14 +14,10 @@ const compareAndReturnDifferentKeys_js_1 = require("../../utils/compareAndReturn
 const studentServices_js_1 = require("../../model/services/studentServices.js");
 function patchOneStudent(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        //const result = await axios(`http://localhost:3000/students/${req.params.id_student}`);
         const result = yield (0, studentServices_js_1.findOneStudentForPatch)(req.params.id_student);
         const currentStudentData = result[0][0];
-        console.log(currentStudentData);
         const updatedStudentData = req.body;
-        console.log(updatedStudentData);
         const updatedKeys = (0, compareAndReturnDifferentKeys_js_1.compareAndReturnDifferentKeys)(currentStudentData, updatedStudentData);
-        console.log(updatedKeys);
         (0, studentServices_js_1.patchStudent)(req.params.id_student, updatedKeys, (err, result) => {
             if (err) {
                 res.status(404).json({ "message": err.message });

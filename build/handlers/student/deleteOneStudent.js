@@ -13,8 +13,8 @@ exports.deleteStudent = void 0;
 const studentServices_js_1 = require("../../model/services/studentServices.js");
 function deleteStudent(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const studentId = req.body.student;
-        (0, studentServices_js_1.deleteOneStudent)(studentId, (err, result) => {
+        //router.delete("/students", deleteStudent);
+        (0, studentServices_js_1.deleteOneStudent)(req.params.id_student, (err, result) => {
             if (err) {
                 res.status(404).json({ "message": err.message });
             }

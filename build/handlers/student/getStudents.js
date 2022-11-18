@@ -17,8 +17,7 @@ function getStudents(req, res) {
             if (err) {
                 return res.status(404).json({ "message": err.message });
             }
-            console.log(typeof (students[0]));
-            res.status(200).json(students);
+            res.status(200).render("pages/students", { data: students });
         });
     });
 }
