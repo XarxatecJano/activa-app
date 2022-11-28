@@ -10,7 +10,6 @@ function findOneUser(user_email, callback) {
         }
         ;
         const userFound = result[0];
-        console.log(userFound);
         callback(null, userFound);
     });
 }

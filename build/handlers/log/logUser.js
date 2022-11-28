@@ -16,19 +16,22 @@ exports.userValidation = void 0;
 const axios_1 = __importDefault(require("axios"));
 function userValidation(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const result = yield axios_1.default.get(`http://localhost:3000/users/${req.body.email}`);
-        console.log(result);
-        res.send("respuesta momnetánea");
-        /*if (result.status==404){
-            res.send("login not ok");
-            res.status(404).render("pages/login", {errorMessage: "El usuario no existe en la BD"});
+        try {
+            const result = yield axios_1.default.get(`http://localhost:3000/users/${req.body.email}`);
+            if (result.data) {
+                const user = result.data;
+                if (req.body.password == result.data.password) {
+                    res.send("LOGIN OK");
+                }
+                else {
+                    res.render("pages/login", { errorMessage: "El usuario y la contraseña no coinciden" });
+                }
+            }
+            res.render("pages/login", { errorMessage: "404. No existe ese usuario" });
         }
-        if (req.body.password == result.data.password){
-            res.status(200).send("LOGIN OK");
+        catch (error) {
+            res.send(error);
         }
-        res.send("login not ok 2");
-        res.status(401).render("pages/login", {errorMessage: "El usuario y la contraseña no son válidos"});
-        */
     });
 }
 exports.userValidation = userValidation;

@@ -37,7 +37,6 @@ function findOneStudent(id: string, callback: Function){
     if(err){ callback(err, null)};
     
     const studentFound: Student = (<RowDataPacket>result)[0];
-   
     callback(null, studentFound);
   })
 };
