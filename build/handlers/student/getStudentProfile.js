@@ -16,12 +16,17 @@ exports.getStudentProfile = void 0;
 const axios_1 = __importDefault(require("axios"));
 function getStudentProfile(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const targetStudentId = 3;
-        const targetStudent = yield (0, axios_1.default)(`http://localhost:3000/students/${targetStudentId}`);
-        //TODO const targetStudent: Student = axiosResponse.data;
-        res.render("pages/studentProfileUpdater", {
-            student: targetStudent.data
-        });
+        if (req.session.email) {
+            const targetStudentId = 3; //TO-DO: cambiar todo eso para funcionar con el email
+            const targetStudent = yield (0, axios_1.default)(`http://localhost:3000/students/${targetStudentId}`);
+            //TODO const targetStudent: Student = axiosResponse.data;
+            res.render("pages/studentProfileUpdater", {
+                student: targetStudent.data
+            });
+        }
+        else {
+            res.send("no tienes permisos de acceso");
+        }
     });
 }
 exports.getStudentProfile = getStudentProfile;

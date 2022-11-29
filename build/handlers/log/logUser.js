@@ -20,6 +20,8 @@ function userValidation(req, res) {
         if (result.data) {
             const user = result.data;
             if (req.body.password == result.data.password) {
+                req.session.email = result.data.email;
+                console.log(req.session);
                 res.send("LOGIN OK");
             }
             else {

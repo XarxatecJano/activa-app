@@ -30,7 +30,7 @@ const express_1 = __importDefault(require("express"));
 const router_js_1 = require("./routes/router.js");
 const path_1 = __importDefault(require("path"));
 const dotenv = __importStar(require("dotenv"));
-const session = require('express-session');
+const session = require('express-session'); //to-do with import
 const express_mysql_session_1 = __importDefault(require("express-mysql-session"));
 const methodOverride = require('method-override');
 dotenv.config({ path: path_1.default.join(__dirname, "..", ".env") });
