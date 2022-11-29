@@ -2,8 +2,9 @@ import express from 'express';
 import {router} from './routes/router.js';
 import path from 'path';
 import * as dotenv from 'dotenv';
+const methodOverride = require('method-override');//TO-DO: cambiar a import
 
-const methodOverride = require('method-override');
+
 dotenv.config({ path: path.join(__dirname, "..", ".env") });
 
 const app = express();
