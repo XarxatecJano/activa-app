@@ -21,6 +21,7 @@ function userValidation(req, res) {
             if (result.data) {
                 const user = result.data;
                 if (req.body.password == result.data.password) {
+                    req.session.userEmail = user.email;
                     res.send("LOGIN OK");
                 }
                 else {

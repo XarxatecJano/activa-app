@@ -10,6 +10,7 @@ async function userValidation(req: express.Request, res: express.Response){
         if (result.data){
             const user: User = result.data;
             if (req.body.password == result.data.password){
+                req.session.userEmail = user.email;
                 res.send("LOGIN OK");
             } else {
                 res.render("pages/login", {errorMessage: "El usuario y la contraseña no coinciden"});
