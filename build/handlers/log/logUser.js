@@ -16,6 +16,7 @@ exports.userValidation = void 0;
 const axios_1 = __importDefault(require("axios"));
 function userValidation(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+<<<<<<< HEAD
         try {
             const result = yield axios_1.default.get(`http://localhost:3000/users/${req.body.email}`);
             if (result.data) {
@@ -27,11 +28,22 @@ function userValidation(req, res) {
                 else {
                     res.render("pages/login", { errorMessage: "El usuario y la contraseña no coinciden" });
                 }
+=======
+        const result = yield axios_1.default.get(`http://localhost:3000/users/${req.body.email}`);
+        if (result.data) {
+            const user = result.data;
+            if (req.body.password == result.data.password) {
+                req.session.email = result.data.email;
+                console.log(req.session);
+                res.send("LOGIN OK");
             }
-            res.render("pages/login", { errorMessage: "404. No existe ese usuario" });
+            else {
+                res.render("pages/login", { errorMessage: "El usuario y la contraseña no coinciden" });
+>>>>>>> feature/fixingBugs
+            }
         }
-        catch (error) {
-            res.send(error);
+        else {
+            res.render("pages/login", { errorMessage: "404. No existe ese usuario" });
         }
     });
 }

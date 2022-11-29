@@ -16,15 +16,26 @@ exports.getStudentProfile = void 0;
 const axios_1 = __importDefault(require("axios"));
 function getStudentProfile(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+<<<<<<< HEAD
         if (req.session.userEmail) {
             const targetStudentId = 3;
+=======
+        if (req.session.email) {
+            const targetStudentId = 3; //TO-DO: cambiar todo eso para funcionar con el email
+>>>>>>> feature/fixingBugs
             const targetStudent = yield (0, axios_1.default)(`http://localhost:3000/students/${targetStudentId}`);
             //TODO const targetStudent: Student = axiosResponse.data;
             res.render("pages/studentProfileUpdater", {
                 student: targetStudent.data
             });
         }
+<<<<<<< HEAD
         res.status(401).send("You're not authorized");
+=======
+        else {
+            res.send("no tienes permisos de acceso");
+        }
+>>>>>>> feature/fixingBugs
     });
 }
 exports.getStudentProfile = getStudentProfile;
