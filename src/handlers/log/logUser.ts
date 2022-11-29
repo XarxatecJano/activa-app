@@ -17,10 +17,7 @@ async function userValidation(req: express.Request, res: express.Response){
         } else {
             res.render("pages/login", {errorMessage: "404. No existe ese usuario"});
         }
-        
-        
-    
-    
+           
 }
 
 export {userValidation};

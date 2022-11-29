@@ -30,10 +30,41 @@ const express_1 = __importDefault(require("express"));
 const router_js_1 = require("./routes/router.js");
 const path_1 = __importDefault(require("path"));
 const dotenv = __importStar(require("dotenv"));
+const session = require('express-session');
+const express_mysql_session_1 = __importDefault(require("express-mysql-session"));
 const methodOverride = require('method-override');
 dotenv.config({ path: path_1.default.join(__dirname, "..", ".env") });
+const optionsStore = {
+    connectionLimit: 10,
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PWD,
+    database: process.env.DB_NAME,
+    createDatabaseTable: true,
+    schema: {
+        tableName: 'sessiontbl',
+        columnNames: {
+            session_id: 'session_id',
+            expires: 'expires',
+            data: 'data',
+        }
+    }
+};
+const sqlStore = new express_mysql_session_1.default(session);
+const sessionStore = new sqlStore(optionsStore);
 const app = (0, express_1.default)();
 app.set("view engine", "ejs");
+app.use(session({
+    name: "probando_sesiones",
+    resave: false,
+    saveUninitialized: false,
+    store: sessionStore,
+    secret: process.env.SESSION_SECRET,
+    cookie: {
+        maxAge: 24 * 60 * 60 * 1000,
+        sameSite: true
+    }
+}));
 const path_static_files = path_1.default.join(__dirname, "..", "public");
 app.use(express_1.default.static(path_static_files));
 app.use(express_1.default.urlencoded({ extended: false }));
