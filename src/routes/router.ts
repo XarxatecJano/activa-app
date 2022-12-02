@@ -9,6 +9,9 @@ import { patchOneStudent } from '../handlers/student/patchOneStudent.js';
 import {userValidation} from '../handlers/log/logUser.js';
 import { getOneUser } from '../handlers/user/getOneUser.js';
 import { insertUser } from '../handlers/user/insertUser.js';
+import { validateToken } from '../utils/validateToken.js';
+import { userIsAdmin } from '../utils/userIsAdmin.js';
+
 const router = express.Router();
 
 router.get("/editStudentProfile", getStudentProfile);
@@ -22,7 +25,7 @@ router.get("/students/:id_student", getOneStudent);
 
 //router.delete("/students", deleteStudent);
 
-router.delete("/students/:id_student", deleteStudent);
+router.delete("/students/:id_student", validateToken, userIsAdmin ,deleteStudent);
 
 router.put("/students/:id_student", updateOneStudent);
 
