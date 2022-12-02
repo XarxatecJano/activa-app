@@ -8,6 +8,7 @@ import {updateOneStudent} from '../handlers/student/updateOneStudent.js';
 import { patchOneStudent } from '../handlers/student/patchOneStudent.js';
 import {userValidation} from '../handlers/log/logUser.js';
 import { getOneUser } from '../handlers/user/getOneUser.js';
+import { insertUser } from '../handlers/user/insertUser.js';
 const router = express.Router();
 
 router.get("/editStudentProfile", getStudentProfile);
@@ -30,5 +31,7 @@ router.patch("/students/:id_student", patchOneStudent);
 router.post("/logUser", userValidation);
 
 router.get("/users/:user_email", getOneUser);
+
+router.post("/users", insertUser);
 
 export {router};

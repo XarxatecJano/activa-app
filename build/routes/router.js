@@ -14,6 +14,7 @@ const updateOneStudent_js_1 = require("../handlers/student/updateOneStudent.js")
 const patchOneStudent_js_1 = require("../handlers/student/patchOneStudent.js");
 const logUser_js_1 = require("../handlers/log/logUser.js");
 const getOneUser_js_1 = require("../handlers/user/getOneUser.js");
+const insertUser_js_1 = require("../handlers/user/insertUser.js");
 const router = express_1.default.Router();
 exports.router = router;
 router.get("/editStudentProfile", getStudentProfile_js_1.getStudentProfile);
@@ -26,3 +27,4 @@ router.put("/students/:id_student", updateOneStudent_js_1.updateOneStudent);
 router.patch("/students/:id_student", patchOneStudent_js_1.patchOneStudent);
 router.post("/logUser", logUser_js_1.userValidation);
 router.get("/users/:user_email", getOneUser_js_1.getOneUser);
+router.post("/users", insertUser_js_1.insertUser);
