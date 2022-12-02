@@ -3,6 +3,8 @@ import { User } from "../../model/types/User.js";
 import express from 'express';
 import axios from "axios";
 import bcrypt from 'bcrypt';
+import jsonwebtoken from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
 async function userValidation(req: express.Request, res: express.Response){
 
@@ -10,8 +12,10 @@ async function userValidation(req: express.Request, res: express.Response){
         if (result.data){
             const user: User = result.data;
             if (await bcrypt.compare(req.body.password, user.password)){
-                req.session.email = result.data.email;
-                res.send("LOGIN OK");
+                const token = jsonwebtoken.sign({"email": user.email, "role": user.role}, process.env.SESSION_SECRET!)
+                req.session.token = token;
+                console.log(token);
+                res.status(200).json(token);
             } else {
                 res.render("pages/login", {errorMessage: "El usuario y la contraseña no coinciden"});
             } 
