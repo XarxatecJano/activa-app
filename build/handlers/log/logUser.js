@@ -14,12 +14,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userValidation = void 0;
 const axios_1 = __importDefault(require("axios"));
+const bcrypt_1 = __importDefault(require("bcrypt"));
 function userValidation(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const result = yield axios_1.default.get(`http://localhost:3000/users/${req.body.email}`);
         if (result.data) {
             const user = result.data;
-            if (req.body.password == result.data.password) {
+            if (yield bcrypt_1.default.compare(req.body.password, user.password)) {
                 req.session.email = result.data.email;
                 res.send("LOGIN OK");
             }

@@ -2,13 +2,14 @@ import {db} from "../../config.js";
 import { User } from "../../model/types/User.js";
 import express from 'express';
 import axios from "axios";
+import bcrypt from 'bcrypt';
 
 async function userValidation(req: express.Request, res: express.Response){
 
         const result = await axios.get(`http://localhost:3000/users/${req.body.email}`);
         if (result.data){
             const user: User = result.data;
-            if (req.body.password == result.data.password){
+            if (await bcrypt.compare(req.body.password, user.password)){
                 req.session.email = result.data.email;
                 res.send("LOGIN OK");
             } else {
