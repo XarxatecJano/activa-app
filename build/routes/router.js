@@ -23,7 +23,6 @@ router.get("/editStudentProfile", getStudentProfile_js_1.getStudentProfile);
 router.post("/students", insertStudent_js_1.insertStudent);
 router.get("/students", getStudents_js_1.getStudents);
 router.get("/students/:id_student", getOneStudent_js_1.getOneStudent);
-//router.delete("/students", deleteStudent);
 router.delete("/students/:id_student", validateToken_js_1.validateToken, userIsAdmin_js_1.userIsAdmin, deleteOneStudent_js_1.deleteStudent);
 router.put("/students/:id_student", updateOneStudent_js_1.updateOneStudent);
 router.patch("/students/:id_student", patchOneStudent_js_1.patchOneStudent);

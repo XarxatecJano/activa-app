@@ -1,5 +1,8 @@
 import express from 'express';
-import {router} from './routes/router.js';
+//import {router} from './routes/router.js';
+import { logRouter } from './routes/log_router.js';
+import { studentRouter } from './routes/student_router.js';
+import { userRouter } from './routes/user_router.js';
 import path from 'path';
 import * as dotenv from 'dotenv';
 const methodOverride = require('method-override');//to-do with import
@@ -27,7 +30,7 @@ const optionsStore = {
 
 const sqlStore = new (MySQLSessionStore as any)(session);
 
-const  sessionStore = new sqlStore(optionsStore);
+const sessionStore = new sqlStore(optionsStore);
 
 const app = express();
 
@@ -35,7 +38,7 @@ const app = express();
 app.set("view engine", "ejs");
 
 app.use(session({
-    name: "probando_sesiones",
+    name: "activa_session",
     resave: false,
     saveUninitialized: false,
     store: sessionStore,
@@ -57,7 +60,10 @@ app.use(methodOverride((req: express.Request, res: express.Response)=>{
     }
 }));
 
-app.use("/", router);
+app.use("/students", studentRouter);
+app.use("/users", userRouter);
+app.use("/logs", logRouter);
+
 app.listen(process.env.PORT, ()=>{
     console.log(`Escuchando en el puerto ${process.env.PORT}`);
 })

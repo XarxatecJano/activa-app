@@ -18,12 +18,9 @@ router.get("/editStudentProfile", getStudentProfile);
 
 router.post("/students",insertStudent);
 
-
 router.get("/students", getStudents);
 
 router.get("/students/:id_student", getOneStudent);
-
-//router.delete("/students", deleteStudent);
 
 router.delete("/students/:id_student", validateToken, userIsAdmin ,deleteStudent);
 

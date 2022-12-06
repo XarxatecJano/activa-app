@@ -7,3 +7,9 @@ table {
 td, th {
     padding:0.7em;
 }
+
+
+#logo-activa{
+    width:30%;
+    margin:  1.5em auto;
+}

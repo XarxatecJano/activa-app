@@ -27,7 +27,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const router_js_1 = require("./routes/router.js");
+//import {router} from './routes/router.js';
+const log_router_js_1 = require("./routes/log_router.js");
+const student_router_js_1 = require("./routes/student_router.js");
+const user_router_js_1 = require("./routes/user_router.js");
 const path_1 = __importDefault(require("path"));
 const dotenv = __importStar(require("dotenv"));
 const methodOverride = require('method-override'); //to-do with import
@@ -55,7 +58,7 @@ const sessionStore = new sqlStore(optionsStore);
 const app = (0, express_1.default)();
 app.set("view engine", "ejs");
 app.use(session({
-    name: "probando_sesiones",
+    name: "activa_session",
     resave: false,
     saveUninitialized: false,
     store: sessionStore,
@@ -75,7 +78,9 @@ app.use(methodOverride((req, res) => {
         return method;
     }
 }));
-app.use("/", router_js_1.router);
+app.use("/students", student_router_js_1.studentRouter);
+app.use("/users", user_router_js_1.userRouter);
+app.use("/logs", log_router_js_1.logRouter);
 app.listen(process.env.PORT, () => {
     console.log(`Escuchando en el puerto ${process.env.PORT}`);
 });
