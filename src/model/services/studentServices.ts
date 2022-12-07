@@ -5,15 +5,15 @@ import {LooseObject} from '../types/LooseObject.js';
 import {buildPatchQuery} from '../../utils/buildPatchQuery.js';
 import mysqlPromise from "mysql2/promise";
 
-function createStudent(student: Student, callback: Function){
-    const queryString = "INSERT INTO student (name, first_surname, second_surname, email_personal, email_activa, phone_number, zip_code) VALUES (?, ?, ?, ?, ?, ?, ?)"
+function createStudent(student: Student, id_user: number, callback: Function){
+    const queryString = `INSERT INTO student (name, first_surname, second_surname, email_personal, email_activa, phone_number, zip_code, prom, id_user) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
   
     db.query(
       queryString,
-      [student.name, student.firstSurname, student.secondSurname, student.personalEmailAddress, student.activaEmailAddress, student.phoneNumber, student.zipCode],
+      [student.name, student.firstSurname, student.secondSurname, student.personalEmailAddress, student.activaEmailAddress, student.phoneNumber, student.zipCode, student.prom, id_user],
       (err, result) => {
         if (err) {callback(err, null)};
-        
+        console.log(result);
         const insertId = (<OkPacket> result).insertId;
         callback(null, insertId);
       }

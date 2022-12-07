@@ -14,7 +14,7 @@ studentRouter.get("/", validateToken, getStudents);
 
 studentRouter.get("/:id_student", validateToken, getOneStudent);
 
-studentRouter.post("/", validateToken, insertStudent);
+studentRouter.post("/", insertStudent);
 
 studentRouter.patch("/:id_student", validateToken, patchOneStudent);
 

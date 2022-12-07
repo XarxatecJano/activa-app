@@ -16,6 +16,6 @@ const studentRouter = express_1.default.Router();
 exports.studentRouter = studentRouter;
 studentRouter.get("/", validateToken_js_1.validateToken, getStudents_js_1.getStudents);
 studentRouter.get("/:id_student", validateToken_js_1.validateToken, getOneStudent_js_1.getOneStudent);
-studentRouter.post("/", validateToken_js_1.validateToken, insertStudent_js_1.insertStudent);
+studentRouter.post("/", insertStudent_js_1.insertStudent);
 studentRouter.patch("/:id_student", validateToken_js_1.validateToken, patchOneStudent_js_1.patchOneStudent);
 studentRouter.delete("/:id_student", validateToken_js_1.validateToken, userIsAdmin_js_1.userIsAdmin, deleteOneStudent_js_1.deleteStudent);
