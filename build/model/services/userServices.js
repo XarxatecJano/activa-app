@@ -21,9 +21,11 @@ function findOneUser(user_email, callback) {
         if (err) {
             callback(err, null);
         }
-        ;
-        const userFound = result[0];
-        callback(null, userFound);
+        else {
+            console.log(result);
+            const userFound = result[0];
+            callback(null, userFound);
+        }
     });
 }
 exports.findOneUser = findOneUser;

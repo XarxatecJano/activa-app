@@ -11,8 +11,7 @@ async function insertStudent(req: express.Request, res: express.Response){
     if (req.session.token != undefined){ 
       const tokenVerified = await jsonwebtoken.verify(req.session.token, process.env.SESSION_SECRET!);
       const myTokenVerified: jwtToken = <jwtToken>tokenVerified;
-      const idUser = myTokenVerified.id;
-      createStudent(newStudent, idUser, (err: Error, studentId: number) => {
+      createStudent(newStudent, myTokenVerified.id, (err: Error, studentId: number) => {
         if (err) {
           res.status(500).json({"message": err.message});
         } else {

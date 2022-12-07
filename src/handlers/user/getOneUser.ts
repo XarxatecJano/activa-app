@@ -9,8 +9,9 @@ function getOneUser(req: express.Request, res: express.Response){
     findOneUser(user_email, (err: Error, result: User)=>{
         if(err){
             res.status(404).json(err);
-        }
-        res.status(200).json(result);
+        } else {
+            res.status(200).json(result);
+        }  
     
     })
 }

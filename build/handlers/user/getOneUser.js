@@ -8,7 +8,9 @@ function getOneUser(req, res) {
         if (err) {
             res.status(404).json(err);
         }
-        res.status(200).json(result);
+        else {
+            res.status(200).json(result);
+        }
     });
 }
 exports.getOneUser = getOneUser;

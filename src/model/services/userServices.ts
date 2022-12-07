@@ -5,14 +5,15 @@ import { OkPacket } from "mysql2";
 import bcrypt from 'bcrypt';
 
 function findOneUser(user_email: string, callback: Function){
- 
     const queryString = "SELECT id, email, password, role, createdAt, lastLog FROM user WHERE email = ?";
     db.query(queryString, [user_email], (err, result)=>{
       if(err){ 
         callback(err, null);
-      };
-      const userFound: User = (<RowDataPacket>result)[0];
-      callback(null, userFound);
+      } else {
+        const userFound: User = (<RowDataPacket>result)[0];
+        callback(null, userFound);
+      }
+      
     })
   };
 
