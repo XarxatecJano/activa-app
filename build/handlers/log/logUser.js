@@ -25,7 +25,6 @@ function userValidation(req, res) {
                 const token = jsonwebtoken_1.default.sign({ "email": user.email, "role": user.role, "id": user.id }, process.env.SESSION_SECRET);
                 req.session.token = token;
                 const isFirstLog = user.lastLog === null;
-                console.log(isFirstLog);
                 //TODO: update user with lastLog
                 isFirstLog ? res.status(200).redirect("http://localhost:3000/createStudent.html") : res.status(200).json({ "message": "el usuario se ha logueado con éxito y no es la primera vez" });
             }

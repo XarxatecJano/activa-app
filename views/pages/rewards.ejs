@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regala puntos Activa</title>
+</head>
+<body>
+    <h1>Regala Activa points</h1>
+    <p>Hola, <%= userStudentData.data.name %> <%=userStudentData.data.first_surname%> </p>
+    <p>Balance puntos Activa: <%= userStudentData.data.activa_points_balance%></p>
+    <p><%= userStudentData.data.id_user %></p>
+    <form action="http://localhost:3000/rewards/<%= userStudentData.data.id_user %>" method="POST">
+       <p>
+            <select name="id_user_rewarded">
+                <% studentsData.forEach( student=>{ %>
+                    <option value="<%= student.id_user %>"><%= student.name %> <%= student.first_surname %></option>
+
+                <% }); %>
+            </select>
+            <label for="xp_points">Puntos: </label><input type="number" id="xp_points" name="xp_points">
+       </p>
+        <p>
+            <label for="description">¿Cuál es el motivo del regalo?: </label>
+            <input type="text" id="description" name="description">
+        </p>
+        <p>
+            <input type="submit">
+        </p>
+    </form>
+</body>
+</html>

@@ -9,3 +9,6 @@ const logUser_js_1 = require("../handlers/log/logUser.js");
 const logRouter = express_1.default.Router();
 exports.logRouter = logRouter;
 logRouter.post("/", logUser_js_1.userValidation);
+logRouter.get("/switchpartials/:footer", (req, res) => {
+    res.render("pages/switchingPartials", { footer: req.params.footer });
+});

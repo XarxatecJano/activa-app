@@ -12,28 +12,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.insertStudent = void 0;
-const studentServices_js_1 = require("../../model/services/studentServices.js");
+exports.showRewardsUI = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-function insertStudent(req, res) {
+const axios_1 = __importDefault(require("axios"));
+function showRewardsUI(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const newStudent = req.body;
         if (req.session.token != undefined) {
             const tokenVerified = yield jsonwebtoken_1.default.verify(req.session.token, process.env.SESSION_SECRET);
             const myTokenVerified = tokenVerified;
-            (0, studentServices_js_1.createStudent)(newStudent, myTokenVerified.id, (err, studentId) => {
-                if (err) {
-                    res.status(500).json({ "message": err.message });
-                }
-                else {
-                    res.status(200).json({ "orderId": studentId });
-                }
-            });
+            const userLoggedStudentData = yield (0, axios_1.default)(`http://localhost:3000/students/userId/${myTokenVerified.id}`);
+            console.log(userLoggedStudentData);
+            const resultAxios = yield (0, axios_1.default)(`http://localhost:3000/students/data`);
+            const studentData = resultAxios.data;
+            res.status(200).render("pages/rewards", { userStudentData: userLoggedStudentData, studentsData: studentData });
         }
         else {
-            res.status(401).json({ "message": "Es obligatorio autenticarse antes de realizar esta operación" });
+            res.status(401).send("No te has autenticado");
         }
     });
 }
-exports.insertStudent = insertStudent;
-;
+exports.showRewardsUI = showRewardsUI;

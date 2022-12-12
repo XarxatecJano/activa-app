@@ -6,5 +6,7 @@ export interface Student {
     activaEmailAddress: string,
     phoneNumber: string,
     zipCode: string,
-    prom: number
+    prom: number,
+    balanceActivaPoints: number,
+    id_user: number
 }

@@ -21,7 +21,7 @@ function createStudent(student: Student, id_user: number, callback: Function){
   };
 
 function findAllStudents(callback:Function){
-  const queryString = "SELECT id, name, first_surname, second_surname, email_personal, email_activa, phone_number, zip_code FROM student";
+  const queryString = "SELECT id, name, first_surname, second_surname, email_personal, email_activa, phone_number, zip_code, id_user FROM student";
   db.query(queryString, (err, result)=>{
     if(err) callback(err, null);
 
@@ -33,6 +33,17 @@ function findAllStudents(callback:Function){
 function findOneStudent(id: string, callback: Function){
  
   const queryString = "SELECT id, name, first_surname, second_surname, email_personal, email_activa, phone_number, zip_code FROM student WHERE id = ?";
+  db.query(queryString, [id], (err, result)=>{
+    if(err){ callback(err, null)};
+    
+    const studentFound: Student = (<RowDataPacket>result)[0];
+    callback(null, studentFound);
+  })
+};
+
+function findOneStudentByIdUSer(id: string, callback: Function){
+ 
+  const queryString = "SELECT id, name, first_surname, second_surname, email_personal, email_activa, phone_number, zip_code, activa_points_balance, id_user FROM student WHERE id_user = ?";
   db.query(queryString, [id], (err, result)=>{
     if(err){ callback(err, null)};
     
@@ -89,4 +100,4 @@ function patchStudent(id: string, updatedData: LooseObject, callback:Function){
 };
 
 
-export {createStudent, findAllStudents, findOneStudent, deleteOneStudent, putOneStudent, patchStudent, findOneStudentForPatch};
+export {createStudent, findAllStudents, findOneStudent, deleteOneStudent, putOneStudent, patchStudent, findOneStudentForPatch, findOneStudentByIdUSer};

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.findOneStudentForPatch = exports.patchStudent = exports.putOneStudent = exports.deleteOneStudent = exports.findOneStudent = exports.findAllStudents = exports.createStudent = void 0;
+exports.findOneStudentByIdUSer = exports.findOneStudentForPatch = exports.patchStudent = exports.putOneStudent = exports.deleteOneStudent = exports.findOneStudent = exports.findAllStudents = exports.createStudent = void 0;
 const config_js_1 = require("../../config.js");
 const buildPatchQuery_js_1 = require("../../utils/buildPatchQuery.js");
 const promise_1 = __importDefault(require("mysql2/promise"));
@@ -31,7 +31,7 @@ function createStudent(student, id_user, callback) {
 exports.createStudent = createStudent;
 ;
 function findAllStudents(callback) {
-    const queryString = "SELECT id, name, first_surname, second_surname, email_personal, email_activa, phone_number, zip_code FROM student";
+    const queryString = "SELECT id, name, first_surname, second_surname, email_personal, email_activa, phone_number, zip_code, id_user FROM student";
     config_js_1.db.query(queryString, (err, result) => {
         if (err)
             callback(err, null);
@@ -53,6 +53,19 @@ function findOneStudent(id, callback) {
     });
 }
 exports.findOneStudent = findOneStudent;
+;
+function findOneStudentByIdUSer(id, callback) {
+    const queryString = "SELECT id, name, first_surname, second_surname, email_personal, email_activa, phone_number, zip_code, activa_points_balance, id_user FROM student WHERE id_user = ?";
+    config_js_1.db.query(queryString, [id], (err, result) => {
+        if (err) {
+            callback(err, null);
+        }
+        ;
+        const studentFound = result[0];
+        callback(null, studentFound);
+    });
+}
+exports.findOneStudentByIdUSer = findOneStudentByIdUSer;
 ;
 function findOneStudentForPatch(id) {
     return __awaiter(this, void 0, void 0, function* () {

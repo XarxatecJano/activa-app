@@ -3,6 +3,7 @@ import express from 'express';
 import { logRouter } from './routes/log_router.js';
 import { studentRouter } from './routes/student_router.js';
 import { userRouter } from './routes/user_router.js';
+import { rewardRouter } from './routes/reward_router.js';
 import path from 'path';
 import * as dotenv from 'dotenv';
 const methodOverride = require('method-override');//to-do with import
@@ -63,6 +64,7 @@ app.use(methodOverride((req: express.Request, res: express.Response)=>{
 app.use("/students", studentRouter);
 app.use("/users", userRouter);
 app.use("/logs", logRouter);
+app.use("/rewards", rewardRouter);
 
 app.listen(process.env.PORT, ()=>{
     console.log(`Escuchando en el puerto ${process.env.PORT}`);

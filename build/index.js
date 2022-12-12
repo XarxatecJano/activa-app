@@ -31,6 +31,7 @@ const express_1 = __importDefault(require("express"));
 const log_router_js_1 = require("./routes/log_router.js");
 const student_router_js_1 = require("./routes/student_router.js");
 const user_router_js_1 = require("./routes/user_router.js");
+const reward_router_js_1 = require("./routes/reward_router.js");
 const path_1 = __importDefault(require("path"));
 const dotenv = __importStar(require("dotenv"));
 const methodOverride = require('method-override'); //to-do with import
@@ -81,6 +82,7 @@ app.use(methodOverride((req, res) => {
 app.use("/students", student_router_js_1.studentRouter);
 app.use("/users", user_router_js_1.userRouter);
 app.use("/logs", log_router_js_1.logRouter);
+app.use("/rewards", reward_router_js_1.rewardRouter);
 app.listen(process.env.PORT, () => {
     console.log(`Escuchando en el puerto ${process.env.PORT}`);
 });
